@@ -1,0 +1,68 @@
+# AI Eval Engineering Starter Kit
+
+An offline-first starter kit for evaluating AI features without confusing a
+passing test, a model score, or a demo with production evidence.
+
+The operating loop is:
+
+```text
+Build → Baseline → Golden Set → Eval → Failure Analysis → Fix → Regression → Release Gate
+```
+
+## What is included
+
+- A portable `SKILL.md` for agent workflows.
+- Example Golden, Regression and High-Risk JSONL sets.
+- A deterministic fixture validator and a small, reproducible runner.
+- Rubric and release-gate templates with explicit critical failures.
+- Synthetic examples for RAG, agent tool use and customer support.
+
+Every example is marked `synthetic_unverified`. It demonstrates structure; it
+is not a verified business standard and must not be presented as customer or
+production evidence.
+
+## Quick start
+
+Requirements: Python 3.10+.
+
+```bash
+python3 runners/validate_cases.py --smoke
+python3 runners/validate_cases.py --full
+python3 runners/validate_cases.py --regression
+python3 runners/validate_cases.py --high-risk
+python3 -m unittest discover -s tests -p 'test_*.py'
+```
+
+The runner validates dataset shape and provenance. It does not call a model or
+claim that a model would answer correctly. Connect a real provider only in a
+private project with credentials, trace capture, and human-approved ground
+truth.
+
+## Evidence boundary
+
+Traditional tests cover schemas, APIs, persistence, tool arguments and
+workflow mechanics. Evals cover correctness, completeness, groundedness,
+hallucination, instruction following, business rules and agent trajectory.
+Unavailable providers and unreviewed expected answers are `BLOCKED` or
+`synthetic_unverified`, never `PASS`.
+
+## Repository map
+
+```text
+evals/       datasets and project success contract
+rubrics/     observable scoring anchors and release gates
+runners/     stable local entry points
+examples/    synthetic RAG, agent and support cases
+docs/        baseline, regression and failure-analysis guidance
+article/     short public explanation of the workflow
+```
+
+## Status
+
+This is a reusable offline starter kit. The deterministic fixture checks are
+locally verifiable. No provider-backed model quality, latency, cost or
+production outcome is claimed by this repository.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
