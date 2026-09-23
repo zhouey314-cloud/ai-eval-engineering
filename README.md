@@ -1,5 +1,7 @@
 # AI Eval Engineering Starter Kit
 
+**LOCAL_RUNNABLE / MODEL_QUALITY=NOT_RUN** · [Example report](docs/example-report.md) · [Case study](docs/case-study.md) · [Resume bullets](docs/resume-bullets.md) · [Interview notes](docs/interview-notes.md)
+
 [![CI](https://github.com/zhouey314-cloud/ai-eval-engineering/actions/workflows/ci.yml/badge.svg)](https://github.com/zhouey314-cloud/ai-eval-engineering/actions/workflows/ci.yml)
 
 ![Eval workflow architecture](docs/images/architecture.svg)
