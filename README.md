@@ -1,5 +1,9 @@
 # AI Eval Engineering Starter Kit
 
+[![CI](https://github.com/zhouey314-cloud/ai-eval-engineering/actions/workflows/ci.yml/badge.svg)](https://github.com/zhouey314-cloud/ai-eval-engineering/actions/workflows/ci.yml)
+
+![Eval workflow architecture](docs/images/architecture.svg)
+
 An offline-first starter kit for evaluating AI features without confusing a
 passing test, a model score, or a demo with production evidence.
 
@@ -38,6 +42,10 @@ claim that a model would answer correctly. Connect a real provider only in a
 private project with credentials, trace capture, and human-approved ground
 truth.
 
+Example output from `--full`: `FIXTURE_SCHEMA_PASS selector=full cases=5` and
+`MODEL_QUALITY=NOT_RUN provider=offline`. See the [example report](docs/example-report.md)
+and [release gate visual](docs/images/release-gate.png).
+
 ## Evidence boundary
 
 Traditional tests cover schemas, APIs, persistence, tool arguments and
@@ -66,3 +74,10 @@ production outcome is claimed by this repository.
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+## Failure taxonomy and interview use
+
+Classify failures as Prompt, Retrieval, Knowledge, Parsing, Tool Selection,
+Tool Arguments, Tool Failure, Workflow, Hallucination, Instruction Following,
+Business Rule, Formatting, Model Capability, Latency, Cost or Unknown. See
+[resume bullets](docs/resume-bullets.md) and [interview notes](docs/interview-notes.md).
