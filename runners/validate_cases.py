@@ -23,6 +23,7 @@ DATASETS = {
 def validate(path: Path) -> tuple[int, list[str]]:
     errors: list[str] = []
     count = 0
+    seen_ids: set[str] = set()
     for line_no, raw in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         if not raw.strip():
             continue
@@ -32,6 +33,16 @@ def validate(path: Path) -> tuple[int, list[str]]:
         except json.JSONDecodeError as exc:
             errors.append(f"{path.name}:{line_no}: invalid JSON: {exc.msg}")
             continue
+        if not isinstance(case, dict):
+            errors.append(f"{path.name}:{line_no}: case must be an object")
+            continue
+        case_id = case.get("case_id")
+        if not isinstance(case_id, str) or not case_id.strip():
+            errors.append(f"{path.name}:{line_no}: case_id must be a non-empty string")
+        elif case_id in seen_ids:
+            errors.append(f"{path.name}:{line_no}: duplicate case_id: {case_id}")
+        else:
+            seen_ids.add(case_id)
         required = {"case_id", "task_type", "tags", "input", "expected", "ground_truth_status", "provenance"}
         missing = sorted(required - case.keys())
         if missing:
@@ -42,6 +53,8 @@ def validate(path: Path) -> tuple[int, list[str]]:
             errors.append(f"{path.name}:{line_no}: tags must be a non-empty list")
         if not isinstance(case.get("expected"), dict):
             errors.append(f"{path.name}:{line_no}: expected must be an object")
+    if count == 0:
+        errors.append(f"{path.name}: dataset must contain at least one case")
     return count, errors
 
 
