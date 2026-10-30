@@ -1,5 +1,10 @@
 # AI Eval Engineering Starter Kit
 
+用于回答“这次 AI 改动究竟改善了什么、有没有回归”。我实现了数据契约校验、已记录响应的机械评测、失败原因和版本比较；真实语义质量与业务验收仍需要独立证据。
+
+[运行已记录响应评测](docs/RECORDED_EVAL.md) · [示例响应格式](examples/recorded-responses.jsonl)
+
+
 **A release-gate starter kit that refuses to confuse fixture validation with model quality.** It helps AI teams preserve baselines, failure cases and evidence boundaries before claiming a feature works.
 
 **LOCAL_RUNNABLE / MODEL_QUALITY=NOT_RUN** · [Example report](docs/example-report.md) · [Case study](docs/case-study.md) · [Resume bullets](docs/resume-bullets.md) · [Interview notes](docs/interview-notes.md)
@@ -23,7 +28,7 @@ Build → Baseline → Golden Set → Eval → Failure Analysis → Fix → Regr
 
 - A portable `SKILL.md` for agent workflows.
 - Example Golden, Regression and High-Risk JSONL sets.
-- A deterministic fixture validator and a small, reproducible runner.
+- A deterministic fixture validator, recorded-response evaluator and baseline comparison.
 - Rubric and release-gate templates with explicit critical failures.
 - Synthetic examples for RAG, agent tool use and customer support.
 
